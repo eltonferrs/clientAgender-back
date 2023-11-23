@@ -1,4 +1,4 @@
-import { ClientCreate, ClientLogin, ClientRead, ClientsRead, LoginResponse } from "../interfaces"
+import { ClientCreate, ClientLogin, ClientRead, ClientUpdate, ClientsRead, LoginResponse } from "../interfaces"
 import { clientReadSchema, clientsReadSchema } from "../schemas"
 import { clientRepository } from "../repositories"
 import { AppError } from "../errors"
@@ -26,4 +26,15 @@ const session =async (order:ClientLogin):Promise<LoginResponse> => {
   return {token}
 }
 
-export default { create, list, session }
+const update =async (infoClient:ClientCreate,order:ClientUpdate):Promise<ClientRead> => {
+  const client:Client = clientRepository.create({...order,...infoClient})
+  await clientRepository.save(client)
+  return clientReadSchema.parse(client)
+}
+
+const remove =async (client:Client): Promise<void> => {
+  await clientRepository.remove(client)
+}
+
+
+export default { create, list, session, update, remove }

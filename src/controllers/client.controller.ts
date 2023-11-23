@@ -15,4 +15,15 @@ const session =async (req:Request, res:Response): Promise<Response> => {
     return res.status(200).json(await clientServices.session(req.body))
 }
 
-export default {create, list, session }
+const update = async (req:Request, res:Response): Promise<Response> =>{
+    const clientInfo = res.locals.client
+    const client: ClientRead = await clientServices.update(req.body,clientInfo)
+    return res.status(200).json(client)
+}
+
+const remove = async (req:Request, res:Response):Promise<Response> =>{
+    await clientServices.remove(res.locals.client)
+    return res.status(204).json()
+}
+
+export default {create, list, session, update, remove }
