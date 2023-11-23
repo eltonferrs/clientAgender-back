@@ -7,4 +7,12 @@ const create = async (req:Request, res:Response): Promise<Response> =>{
     return res.status(201).json(client)
 }
 
-export default {create}
+const list = async (req:Request, res:Response): Promise<Response> =>{
+    return res.status(200).json( await clientServices.list())
+}
+
+const session =async (req:Request, res:Response): Promise<Response> => {
+    return res.status(200).json(await clientServices.session(req.body))
+}
+
+export default {create, list, session }

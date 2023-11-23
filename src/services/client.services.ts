@@ -1,7 +1,10 @@
-import { Client } from "../entities"
+import { ClientCreate, ClientLogin, ClientRead, ClientsRead, LoginResponse } from "../interfaces"
+import { clientReadSchema, clientsReadSchema } from "../schemas"
 import { clientRepository } from "../repositories"
-import { ClientCreate, ClientRead } from "../interfaces"
-import { clientReadSchema } from "../schemas"
+import { AppError } from "../errors"
+import { compare } from "bcryptjs"
+import { Client } from "../entities"
+import { sign } from "jsonwebtoken"
 
 const create =async (order:ClientCreate): Promise<ClientRead> => {
   const newClient:Client = clientRepository.create(order)
@@ -9,4 +12,18 @@ const create =async (order:ClientCreate): Promise<ClientRead> => {
   return clientReadSchema.parse(newClient)
 }
 
-export default { create }
+const list = async (): Promise<ClientsRead> =>{
+  return clientsReadSchema.parse(await clientRepository.find())
+}
+
+const session =async (order:ClientLogin):Promise<LoginResponse> => {
+  const client: Client | null = await clientRepository.findOneBy({email:order.email})
+  if(!client) throw new AppError("Invalid credentials", 401)
+  const password: boolean = await compare(order.password, client.password)
+  if(!password) throw new AppError("Invalid credentials", 401)
+
+  const token: string = sign({},String(process.env.SECRET_KEY)!,{subject:client.id,expiresIn: process.env.EXPIRES_IN!})
+  return {token}
+}
+
+export default { create, list, session }

@@ -20,7 +20,7 @@ const clientReadSchema = clientSchema.omit({
 const clientsReadSchema = z.array(clientReadSchema)
 
 const clientLoginSchema = clientSchema.pick({
-    emai:true, password:true
+    email:true, password:true
 })
 
 const clientUpdateSchame = clientCreatSchema.partial() 
