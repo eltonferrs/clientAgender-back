@@ -3,7 +3,7 @@ import { clientRepository } from "../repositories";
 import { AppError } from "../errors";
 import { Client } from "../entities";
 
-export const verify = async (req:Request,res:Response,next:NextFunction): Promise<void> =>{
+export const verifyClient = async (req:Request,res:Response,next:NextFunction): Promise<void> =>{
     const id = req.params.id
     if(!id) throw new AppError("Client not found", 404)
     const client: Client|null = await clientRepository.findOneBy({id:id})

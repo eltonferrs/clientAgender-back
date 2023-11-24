@@ -26,7 +26,7 @@ const session =async (order:ClientLogin):Promise<LoginResponse> => {
   return {token}
 }
 
-const update =async (infoClient:ClientCreate,order:ClientUpdate):Promise<ClientRead> => {
+const update = async (infoClient:ClientCreate,order:ClientUpdate):Promise<ClientRead> => {
   const client:Client = clientRepository.create({...order,...infoClient})
   await clientRepository.save(client)
   return clientReadSchema.parse(client)

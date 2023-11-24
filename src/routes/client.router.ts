@@ -11,5 +11,5 @@ clientRouter.use(middleware.uniqueEmail)
 clientRouter.post('',middleware.validBody(clientCreatSchema),clientController.create)
 
 clientRouter.use(middleware.validToken)
-clientRouter.patch('/:id',middleware.verify,middleware.validBody(clientUpdateSchame), clientController.update)
-clientRouter.delete('/:id',middleware.verify,clientController.remove)
+clientRouter.patch('/:id',middleware.verifyClient,middleware.validBody(clientUpdateSchame), clientController.update)
+clientRouter.delete('/:id',middleware.verifyClient,clientController.remove)
