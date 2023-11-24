@@ -18,7 +18,7 @@ class Contact{
     @CreateDateColumn({type:'date'})
     registered: string;
 
-    @ManyToOne(()=> Client, (c)=> c.id)
+    @ManyToOne(()=> Client,{eager:true})
     client:Client;
 }
 

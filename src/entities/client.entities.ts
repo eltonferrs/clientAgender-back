@@ -22,9 +22,6 @@ class Client {
     @CreateDateColumn({type:'date'})
     started: string
 
-    @OneToMany(()=> Contact, (ct)=>ct.client)
-    contacts: Contact[]
-
     @BeforeInsert()
     @BeforeUpdate()
     hashPassword(){
