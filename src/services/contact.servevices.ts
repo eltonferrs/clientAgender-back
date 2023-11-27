@@ -12,6 +12,11 @@ const create = async (order:contactCreate, client:Client): Promise<contactRead> 
 const list = async (client:Client):Promise<contactsRead> => {
     return contactsReadSchema.parse(await contactRepository.findBy({client:{...client}}))
 }
+
+const retrive = async (client:Client,contactId:string):Promise<contactsRead> => {
+    return contactsReadSchema.parse(await contactRepository.findBy({id:contactId}))
+}
+
 const update = async (infoContact:contactCreate,order:contactUpdate):Promise<contactRead> => {
     const contact:Contact = contactRepository.create({...order,...infoContact})
     await contactRepository.save(contact)
@@ -19,8 +24,7 @@ const update = async (infoContact:contactCreate,order:contactUpdate):Promise<con
 }
 
 const remove =async (contact:Contact): Promise<void> => {
-    console.log('socorro jesus')
     await contactRepository.remove(contact)
 }
 
-export default { create, list, update, remove }
+export default { create, list, update, remove, retrive }

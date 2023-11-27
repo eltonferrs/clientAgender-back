@@ -12,6 +12,11 @@ const list = async (req:Request, res: Response): Promise<Response> =>{
     return res.status(200).json( await contactServevices.list(res.locals.client))
 }
 
+const retrive = async (req:Request, res: Response): Promise<Response> =>{
+    console.log(req.params.contactid)
+    return res.status(200).json( await contactServevices.retrive(res.locals.client,req.params.contactid))
+}
+
 const update =  async (req:Request, res:Response): Promise<Response> =>{
     const contactInfo = res.locals.contact
     const contact: contactRead = await contactServevices.update(req.body,contactInfo)
@@ -23,4 +28,4 @@ const remove = async (req:Request, res:Response):Promise<Response> =>{
     return res.status(204).json()
 }
 
-export default { create, list, update, remove}
+export default { create, list, update, remove, retrive}
