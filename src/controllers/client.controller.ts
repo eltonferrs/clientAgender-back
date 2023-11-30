@@ -7,6 +7,10 @@ const create = async (req:Request, res:Response): Promise<Response> =>{
     return res.status(201).json(client)
 }
 
+const get = async (req:Request, res:Response): Promise<Response> =>{
+    return res.status(200).json( await clientServices.get(res.locals.clientId))
+}
+
 const list = async (req:Request, res:Response): Promise<Response> =>{
     return res.status(200).json( await clientServices.list())
 }
@@ -26,4 +30,4 @@ const remove = async (req:Request, res:Response):Promise<Response> =>{
     return res.status(204).json()
 }
 
-export default {create, list, session, update, remove }
+export default {create, list, session, update, remove, get }

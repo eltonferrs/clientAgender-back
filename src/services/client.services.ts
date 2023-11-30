@@ -12,6 +12,10 @@ const create =async (order:ClientCreate): Promise<ClientRead> => {
   return clientReadSchema.parse(newClient)
 }
 
+const get = async (clientId:string): Promise<ClientRead> =>{
+  return clientReadSchema.parse(await clientRepository.findOneBy({id:clientId}))
+}
+
 const list = async (): Promise<ClientsRead> =>{
   return clientsReadSchema.parse(await clientRepository.find())
 }
@@ -37,4 +41,4 @@ const remove =async (client:Client): Promise<void> => {
 }
 
 
-export default { create, list, session, update, remove }
+export default { create, get, list, session, update, remove }
