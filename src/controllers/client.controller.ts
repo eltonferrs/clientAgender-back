@@ -16,7 +16,7 @@ const list = async (req:Request, res:Response): Promise<Response> =>{
 }
 
 const session =async (req:Request, res:Response): Promise<Response> => {
-    return res.status(200).json(await clientServices.session(req.body))
+    return res.status(201).json(await clientServices.session(req.body))
 }
 
 const update = async (req:Request, res:Response): Promise<Response> =>{
