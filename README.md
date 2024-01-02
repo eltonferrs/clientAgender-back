@@ -3,7 +3,7 @@
 </h1>
 
 <p align = "center">
-Este é o backend da aplicação ClientAgender - Um agenda web para seus contatos! O objetivo dessa aplicação é demonstrar conchecimento em tecnologias backend, organização de código e fornecer dados para criação de interfaces.
+Este é o backend da aplicação ClientAgender - Um agenda web para seus contatos! O objetivo dessa aplicação é demonstrar conhecimento em tecnologias backend, organização de código e fornecer dados para criação de interfaces.
 </p>
 
 ##  Visão Geral
